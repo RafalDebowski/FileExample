@@ -8,6 +8,4 @@ public interface Cabinet {
     List<Folder> findFoldersBySize(String size);
 
     int count();
-
-    List<Folder> getOSFolders();
 }

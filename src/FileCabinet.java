@@ -1,25 +1,25 @@
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class WindowsFactory implements Cabinet{
+public class FileCabinet implements Cabinet {
 
     private List<Folder> folders;
 
-    public WindowsFactory(){
-        this.folders = getOSFolders();
+    public FileCabinet() {
+        this.folders = new Mock().getOSFolders();
     }
 
-    @Override
-    public List<Folder> getOSFolders() {
-        //todo get folders from OS
-        return null;
+    private Stream<Folder> flatten() {
+        ArrayList<Folder> flatmapList = new ArrayList<>();
+        checkMultifolder(folders, flatmapList);
+        return flatmapList.stream();
     }
 
     @Override
     public Optional<Folder> findFolderByName(String name) {
         try {
-            return folders
-                    .stream()
+            return flatten()
                     .filter(folder ->
                             Objects.equals(folder.getName(), name)
                     ).findFirst();
@@ -32,9 +32,7 @@ public class WindowsFactory implements Cabinet{
     @Override
     public List<Folder> findFoldersBySize(String size) {
         try {
-
-            return folders
-                    .stream()
+            return flatten()
                     .filter(folder ->
                             Objects.equals(folder.getSize(), size)
                     ).collect(Collectors.toList());
@@ -46,6 +44,15 @@ public class WindowsFactory implements Cabinet{
 
     @Override
     public int count() {
-        return folders.size();
+        return (int) flatten().count();
+    }
+
+    private void checkMultifolder(List<Folder> multiFolder, ArrayList<Folder> flatMapList) {
+        multiFolder.forEach(folder -> {
+            flatMapList.add(folder);
+            if (folder instanceof MultiFolder) {
+                checkMultifolder(((MultiFolder) folder).getFolders(), flatMapList);
+            }
+        });
     }
 }
