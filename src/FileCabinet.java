@@ -6,8 +6,8 @@ public class FileCabinet implements Cabinet {
 
     private List<Folder> folders;
 
-    public FileCabinet() {
-        this.folders = new Mock().getOSFolders();
+    public FileCabinet(List<Folder> folders) {
+        this.folders = folders;
     }
 
     private Stream<Folder> flatten() {

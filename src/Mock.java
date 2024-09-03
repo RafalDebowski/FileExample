@@ -18,7 +18,7 @@ public class Mock {
 
                                     @Override
                                     public String getSize() {
-                                        return "FOLDER 1";
+                                        return SizeEnum.SMALL.name();
                                     }
                                 }, new Folder() {
                                     @Override
@@ -28,7 +28,7 @@ public class Mock {
 
                                     @Override
                                     public String getSize() {
-                                        return "FOLDER 2";
+                                        return SizeEnum.LARGE.name();
                                     }
                                 }, new MultiFolder() {
                                     @Override
@@ -41,7 +41,7 @@ public class Mock {
 
                                             @Override
                                             public String getSize() {
-                                                return "FOLDER 3";
+                                                return SizeEnum.LARGE.name();
                                             }
                                         });
                                     }
@@ -53,7 +53,7 @@ public class Mock {
 
                                     @Override
                                     public String getSize() {
-                                        return "MULTIFOLDER 3";
+                                        return SizeEnum.MEDIUM.name();
                                     }
                                 });
                             }
@@ -65,7 +65,7 @@ public class Mock {
 
                             @Override
                             public String getSize() {
-                                return "MULTIFOLDER 2";
+                                return SizeEnum.LARGE.name();
                             }
                         });
                     }
@@ -77,7 +77,7 @@ public class Mock {
 
                     @Override
                     public String getSize() {
-                        return "MULTIFOLDER 1";
+                        return SizeEnum.SMALL.name();
                     }
                 }
         );
